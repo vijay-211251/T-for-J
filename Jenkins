@@ -1,8 +1,8 @@
 pipeline {
     agent any  // Runs on any available Jenkins agent
     environment {
-        TF_VAR_access_key = credentials('AWS_ACCESS_KEY') // AWS access key stored in Jenkins
-        TF_VAR_secret_key = credentials('AWS_SECRET_KEY') // AWS secret key stored in Jenkins
+        TF_VAR_access_key = credentials('AKIAQSOI4AGKQ7PGL7UT') // AWS access key stored in Jenkins
+        TF_VAR_secret_key = credentials('RSJAIOVPHZBG5ABHX327EPHUS4') // AWS secret key stored in Jenkins
     }
     stages {
         stage('Checkout Code') {

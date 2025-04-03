@@ -1,0 +1,33 @@
+pipeline {
+    agent any  // Runs on any available Jenkins agent
+    environment {
+        TF_VAR_access_key = credentials('AWS_ACCESS_KEY') // AWS access key stored in Jenkins
+        TF_VAR_secret_key = credentials('AWS_SECRET_KEY') // AWS secret key stored in Jenkins
+    }
+    stages {
+        stage('Checkout Code') {
+            steps {
+                // Pull code from Git repository
+                checkout scm
+            }
+        }
+        stage('Terraform Init') {
+            steps {
+                // Initialize Terraform to download provider plugins
+                sh 'terraform init'
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                // Generate execution plan for infrastructure changes
+                sh 'terraform plan -out=tfplan'
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                // Apply infrastructure changes
+                sh 'terraform apply -auto-approve tfplan'
+            }
+        }
+    }
+}
